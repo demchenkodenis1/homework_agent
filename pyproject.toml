@@ -1,0 +1,8 @@
+[project]
+name = "homework-01-agent"
+version = "0.1.0"
+description = "Агент уровня 1 для AgentScore: один запрос к модели, без инструментов"
+requires-python = ">=3.11"
+dependencies = [
+    "openai==2.26.0",
+]
