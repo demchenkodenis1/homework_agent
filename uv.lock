@@ -61,7 +61,7 @@ wheels = [
 ]
 
 [[package]]
-name = "homework-01-agent"
+name = "homework-02-agent"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
