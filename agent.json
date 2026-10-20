@@ -1,9 +1,24 @@
 {
   "schema_version": 1,
-  "name": "homework-02-agent",
-  "entrypoint": ["python", "/agent/agent.py", "--task-file", "/task/TASK.md", "--workspace", "/testbed"],
+  "name": "homework-03-agent",
+  "entrypoint": [
+    "python",
+    "/agent/agent.py",
+    "--task-file",
+    "/task/TASK.md",
+    "--workspace",
+    "/testbed",
+    "--context-mode",
+    "rag",
+    "--search-mode",
+    "bm25"
+  ],
   "runtime": "Python 3.11; dependencies in uv.lock",
   "model": "deepseek-v4.1-flash",
   "thinking": "high",
-  "required_env": ["OPENAI_API_KEY", "OPENAI_BASE_URL", "OPENAI_MODEL"]
+  "required_env": [
+    "OPENAI_API_KEY",
+    "OPENAI_BASE_URL",
+    "OPENAI_MODEL"
+  ]
 }
