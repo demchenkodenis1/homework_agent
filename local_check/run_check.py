@@ -12,6 +12,7 @@
 (и OPENAI_BASE_URL, если нужен не api.openai.com).
 """
 import os
+import argparse
 import shutil
 import subprocess
 import sys
@@ -38,6 +39,13 @@ def git(*args, cwd):
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--log-db", type=Path, help="Локальный SQLite-журнал вне каталога проекта")
+    args = parser.parse_args()
+    if args.log_db:
+        args.log_db = args.log_db.expanduser().resolve()
+        if args.log_db.is_relative_to(ROOT):
+            parser.error("База должна лежать вне каталога проекта")
     load_env_file()
     missing = [k for k in ("OPENAI_API_KEY", "OPENAI_MODEL") if not os.environ.get(k)]
     if missing:
@@ -55,6 +63,8 @@ def main() -> int:
 
     cmd = [sys.executable, str(ROOT / "agent.py"),
            "--task-file", str(task_dir / "TASK.md"), "--workspace", str(testbed)]
+    if args.log_db:
+        cmd += ["--log-db", str(args.log_db)]
     print("$", " ".join(cmd))
     start = time.perf_counter()
     try:
